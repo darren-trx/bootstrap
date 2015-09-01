@@ -15,7 +15,5 @@ echo 'y' | ~/dropbox.py start -i
 # zombie dropbox daemon, no account linked yet
 killall dropbox
 
-# run the Dropbox daemon in the background
-# or it sticks around in the foreground
-# even after the account has been linked
+# run the Dropbox daemon to properly link an account
 ~/.dropbox-dist/dropboxd

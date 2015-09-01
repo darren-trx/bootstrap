@@ -12,12 +12,14 @@ pip --version > /dev/null
 dotfiles --version > /dev/null
 [ $? -eq 0 ] || sudo pip install dotfiles
 
+ln -s "${DOTFILES_REPO}/.dotfilesrc" ~/.dotfilesrc
+
 # sync, list, and check dotfiles symlinks
 echo "Syncing dotfiles..."
-dotfiles --repo "${DOTFILES_REPO}" --sync
+dotfiles --sync
 echo
 echo "Currently managed dotfiles:"
-dotfiles --repo "${DOTFILES_REPO}" --list
+dotfiles --list
 echo
 echo "Checking for broken/unsynced symlinks..."
-dotfiles --repo "${DOTFILES_REPO}" --check
+dotfiles --check

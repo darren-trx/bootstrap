@@ -5,8 +5,8 @@
 ########################################################
 
 # Dropbox shortcut/autostart for this user ONLY
+echo '[ "$(pidof dropbox)" ] || dropbox start' >> ~/.profile
 echo "alias dropbox='~/dropbox.py'" >> ~/.profile
-echo "dropbox start" >> ~/.profile
 
 . ~/.profile
 
