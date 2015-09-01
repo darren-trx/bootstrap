@@ -1,9 +1,12 @@
+[ -d "$HOME/.ssh" ] || mkdir -pv "$HOME/.ssh"
+
 SSH_ENV="$HOME/.ssh/env"
+
 function start_agent {
   echo -n "Initialising new SSH agent..."
   
   # store ssh-agent startup output as a script for future reference
-  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+  ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
   chmod 600 "${SSH_ENV}"
   . "${SSH_ENV}" > /dev/null
 
@@ -17,7 +20,7 @@ function start_agent {
 # is no longer running, then start a new ssh agent
 if [ -f "${SSH_ENV}" ]; then
   . "${SSH_ENV}" > /dev/null  # Sets SSH_AGENT_PID
-  if [ -z "$(ps -ef | grep 'ssh-agent' | grep ${SSH_AGENT_PID})" ]; then
+  if [ -z "$(ps -ef | grep ssh-agent | grep ${SSH_AGENT_PID})" ]; then
     start_agent
   fi
 # if SSH_ENV file does not exist, then start a new ssh agent
