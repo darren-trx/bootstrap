@@ -14,10 +14,8 @@ export VISUAL=vim
 export HISTSIZE=10000
 # avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
-# append history on shell exit (ie. logout)
-# (instead of overwriting the history file)
+# append history on shell exit (logout) instead of overwriting history file
 shopt -s histappend
-
 # keep multi line commands together in history
 shopt -s cmdhist
 
@@ -33,6 +31,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
+# git completion & prompt no longer seem necessary
 #if [ -f ~/git-prompt.sh ]; then source ~/git-prompt.sh; fi
 #if [ -f ~/git-completion.bash ]; then source ~/git-completion.bash; fi
 #if [ -f ~/docker-completion.bash ]; then source ~/docker-completion.bash; fi
@@ -45,19 +44,27 @@ elif [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
+# autostart dropbox daemon if it has been setup (dropbox alias)
+# and no dropbox processes are already running for this user
+if [ "$(which dropbox)" ]; then
+  if [ ! "$(pgrep dropbox -u $UID)" ]; then
+    # dropbox start   # disabled by default
+    : # null statement placehold
+  fi
+fi
 
 # PS1 variables, functions, etc.
 Color_Off="\[\033[0m\]"
 Black="\[\033[0;30m\]"
 White="\[\033[0;37m\]"
-Cyan2="\[\033[38;5;24m\]"
-Cyan3="\[\033[38;5;31m\]"
 Grey="\[\033[1;30m\]"
 Red="\[\033[0;31m\]"
 Green="\[\033[0;32m\]" 
 Blue="\[\033[0;34m\]"
 Blue2="\[\033[38;5;32m\]"
 Cyan="\[\033[0;36m\]"
+Cyan2="\[\033[38;5;24m\]"
+Cyan3="\[\033[38;5;31m\]"
 Yellow="\[\033[0;33m\]"
 BRed="\[\033[1;31m\]"
 BGreen="\[\033[1;32m\]"
