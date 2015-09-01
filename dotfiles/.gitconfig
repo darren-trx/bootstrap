@@ -1,0 +1,53 @@
+[core]
+    editor = vim
+   #autocrlf=true   # Windows
+   #symlinks=false  # Windows
+[user]
+    name = Darren
+    email = darren.q@gmail.com
+[github]
+    user = darren-trx
+   #token = 
+[color]
+    ui = true
+    branch = true
+    diff = true
+    status = true
+[push]
+    default = simple
+
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt=false
+[difftool "p4merge"]
+    cmd = p4merge \"$LOCAL\" \"$REMOTE\"
+
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+[mergetool]
+    prompt = false
+[mergetool "p4merge"]
+    cmd = p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+    trustExitCode = false
+
+[alias]
+    a    = add
+    qc   = commit -m   # quick commit
+    co   = checkout
+    s    = status
+    ss   = status --short
+    b    = branch -av
+    l    = !git --no-pager log --reverse
+    lf   = log --follow
+    ls3  = log --stat -n3 --reverse
+    ds   = diff --stat
+    df   = diff FETCH_HEAD
+    dfs  = diff --stat FETCH_HEAD
+    dsf  = diff --stat FETCH_HEAD
+    dt   = difftool
+    dtf  = difftool FETCH_HEAD
+    mt   = mergetool
+    oops = reset --soft HEAD~1
+
