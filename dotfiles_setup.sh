@@ -2,19 +2,16 @@
 
 # https://pypi.python.org/pypi/dotfiles
 
-DOTFILES_REPO=~/bootstrap/dotfiles
+DOTFILES_REPO="${HOME}/bootstrap/dotfiles"
+DOTFILES_LINK="${HOME}/.dotfilesrc"
 
 # install pip if necessary
-pip --version > /dev/null
-[ $? -eq 0 ] || sudo ./pip_install.sh
+[ "$(which pip)" ] || sudo ./pip_install.sh
 
 # install dotfiles if necessary
-dotfiles --version > /dev/null
-[ $? -eq 0 ] || sudo pip install dotfiles
+[ "$(which dotfiles)" ] || sudo pip install dotfiles
 
-if [ ! -f "~/.dotfilesrc" ]; then
-    ln -s "${DOTFILES_REPO}/.dotfilesrc" ~/
-fi
+[ -f "${DOTFILES_LINK}" ] || ln -s "${DOTFILES_REPO}/.dotfilesrc" "${DOTFILES_LINK}"
 
 # sync, list, and check dotfiles symlinks
 echo "Syncing dotfiles..."
