@@ -50,4 +50,5 @@
     dtf  = difftool FETCH_HEAD
     mt   = mergetool
     oops = reset --soft HEAD~1
-
+    sha = "!f(){ git rev-parse --short HEAD 2>/dev/null; };f"
+    nukepull = !git clean --force && git fetch && git reset FETCH_HEAD --hard && git checkout master
