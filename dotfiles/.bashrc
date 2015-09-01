@@ -55,6 +55,7 @@ Grey="\[\033[1;30m\]"
 Red="\[\033[0;31m\]"
 Green="\[\033[0;32m\]" 
 Blue="\[\033[0;34m\]"
+Blue2="\[\033[38;5;32m\]"
 Cyan="\[\033[0;36m\]"
 Yellow="\[\033[0;33m\]"
 BRed="\[\033[1;31m\]"
@@ -73,7 +74,7 @@ if [ -n "$DISPLAY" ] && [ "$TERM" == "xterm" ]; then
 fi
 
 if [ "$(which git)" ]; then
-PS1=$Cyan'\u'$DkCyan'@'$Cyan'\h '$Color_Off'\
+PS1=$Cyan'\u'$DkCyan'@'$Blue2'\h '$Color_Off'\
 $(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1;\
 if [ "$?" -eq "0" ]; then echo "'$Green'"; else echo "'$Red'"; fi)$(__git_ps1 "[%s]") ";\
