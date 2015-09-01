@@ -1,0 +1,35 @@
+SSH_ENV="$HOME/.ssh/env"
+function start_agent {
+  echo -n "Initialising new SSH agent..."
+  
+  # store ssh-agent startup output as a script for future reference
+  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+  chmod 600 "${SSH_ENV}"
+  . "${SSH_ENV}" > /dev/null
+
+  if [ "$(pidof ssh-agent)" == "${SSH_AGENT_PID}" ]; then
+    echo " OK ... PID ${SSH_AGENT_PID}"
+  fi
+}
+
+# if SSH_ENV file exists, but the PID it refers to
+# is no longer running, then start a new ssh agent
+if [ -f "${SSH_ENV}" ]; then
+  . "${SSH_ENV}" > /dev/null  # Sets SSH_AGENT_PID
+  if [ -z "$(ps -ef | grep 'ssh-agent' | grep ${SSH_AGENT_PID})" ]; then
+    start_agent
+  fi
+# if SSH_ENV file does not exist, then start a new ssh agent
+else
+  start_agent
+fi
+
+# check if ssh agent is behaving
+if [ "$(pidof ssh-agent)" != "${SSH_AGENT_PID}" ]; then
+  # are multiple ssh agents open?
+  if [ `pidof ssh-agent | wc -w` -gt 1 ]; then
+    echo "Multiple ssh agents are running (PIDs $(pidof ssh-agent))"
+  else
+    echo "ssh agent PID $(pidof ssh-agent) does not match ~/.ssh/env"
+  fi
+fi
