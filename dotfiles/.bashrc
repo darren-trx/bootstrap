@@ -72,10 +72,6 @@ BYellow="\[\033[1;33m\]"
 BBlue="\[\033[1;34m\]"
 BCyan="\[\033[1;36m\]"
 
-git_sha() {
-  git rev-parse --short HEAD 2>/dev/null
-}
-
 # if xterm is being run under X, then set TERM to 256 color (for vim color scheme)
 if [ -n "$DISPLAY" ] && [ "$TERM" == "xterm" ]; then
   export TERM=xterm-256color
