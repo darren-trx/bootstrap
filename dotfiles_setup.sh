@@ -5,6 +5,13 @@
 DOTFILES_REPO="${HOME}/bootstrap/dotfiles"
 DOTFILES_LINK="${HOME}/.dotfilesrc"
 
+DOTFILES_OPTS="$@"
+
+if [ "$(pwd)" != "${HOME}/bootstrap" ]; then
+  echo "dotfiles must be from ${HOME}/bootstrap"
+  exit 1
+fi
+
 # install pip if necessary
 [ "$(which pip)" ] || sudo ./pip_install.sh
 
@@ -15,7 +22,7 @@ DOTFILES_LINK="${HOME}/.dotfilesrc"
 
 # sync, list, and check dotfiles symlinks
 echo "Syncing dotfiles..."
-dotfiles --sync
+dotfiles --sync $DOTFILES_OPTS
 echo
 echo "Currently managed dotfiles:"
 dotfiles --list
