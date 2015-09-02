@@ -12,7 +12,7 @@ if exists("*pathogen#infect")
   "### CtrlP
   " <Ctrl-P> fuzzy finder file opener
   " <Ctrl-v>/<Ctrl-x> open file in vert/horiz split 
-  " <Ctrl-n><Ctrl-p> next/previous search in history
+  " <Ctrl-n>/<Ctrl-p> next/previous search in history
   let g:ctrlp_show_hidden = 1
 
   "### Airline
@@ -169,7 +169,10 @@ endfunction
 " 25%  move to a location based on percentage
 " :g/word/  show all line matches in a pane
 " :%s/old/new/gc  replace text globally with confirmation
-
+" do  diff get changes from other window into current window
+" dp  diff put changes from current window into other window
+" ]c  diff jump to next change
+" [c  diff jump to previous change
 
 "paste clipboard without indenting
 inoremap <F12> <Esc>:set paste!<CR>:set paste?<CR>i
@@ -186,7 +189,7 @@ nmap <silent> <leader>w :w!<CR>
 nmap <silent> <leader>q :q<CR>
 nmap <silent> <leader>e :E<CR>
 nmap <silent> <leader>p :lcd %:p:h<CR>:pwd<CR>
-nmap <silent> <leader>f :CtrlP<CR>
+nmap <silent> <leader>; :CtrlP<CR>
 nmap <silent> <leader>r :CtrlPMRU<CR>
 
 "shortcuts to enable/disable various features
