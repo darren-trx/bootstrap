@@ -52,9 +52,9 @@ if [ ! -e "${HOME}/.gitconfig" ]; then
   fi
 fi
 
-# set git remote origins to ssh url
-git remote set-url origin "${GITHUB_REPO_SSH}"
+# set git push remote origin to ssh url
 git remote set-url --push origin "${GITHUB_REPO_SSH}" 
+# leave pull/fetch remote origin as is so it still works if the key is later revoked
 
 # create an ssh agent env file if there isnt one already
 SSH_ENV="${HOME}/.ssh/env"
