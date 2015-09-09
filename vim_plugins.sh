@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VIM_PLUGINS_SRC="https://github.com/darren-trx/vim-plugins"
+VIM_PLUGINS_REPO="https://github.com/darren-trx/vim-plugins"
 
 declare -A plugin
 plugin["vim-pathogen"]="https://github.com/tpope/vim-pathogen"
@@ -19,7 +19,7 @@ VIM_PLUGINS="${HOME}/.vim-plugins"
 [ -e "${VIM_HOME}" ] || mkdir -v "${VIM_HOME}"
 
 # clone vim plugin repo into ~/.vim-plugins
-[ -d "${VIM_PLUGINS}" ] || git clone "${VIM_PLUGINS_SRC}" "${VIM_PLUGINS}"
+[ -d "${VIM_PLUGINS}" ] || git clone "${VIM_PLUGINS_REPO}" "${VIM_PLUGINS}"
 
 # refresh the vim plugin subtrees from their original repos
 if [ "$1" == "--refresh" ]; then
@@ -36,8 +36,8 @@ if [ "$1" == "--refresh" ]; then
 fi
 
 # delete existing autoload/bundle with extreme prejudice
-[ ! -e "${VIM_HOME}/autoload" ] || rm -rfv "${VIM_HOME}/autoload" 
-[ ! -e "${VIM_HOME}/bundle" ] || rm -rfv "${VIM_HOME}/bundle"
+[ ! -e "${VIM_HOME}/autoload" ] || rm -rf "${VIM_HOME}/autoload" 
+[ ! -e "${VIM_HOME}/bundle" ] || rm -rf "${VIM_HOME}/bundle"
 
 ln -v -s "${VIM_PLUGINS}/bundle/vim-pathogen/autoload" "${VIM_HOME}/autoload"
 ln -v -s "${VIM_PLUGINS}/bundle" "${VIM_HOME}/bundle"
