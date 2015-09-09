@@ -39,6 +39,7 @@
     s    = status
     ss   = status --short
     b    = branch -av
+    f    = fetch
     l    = !git --no-pager log --reverse
     lf   = log --follow
     ls3  = log --stat -n3 --reverse
