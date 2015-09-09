@@ -1,4 +1,6 @@
 ### Vim - Ignore plugins
+.vim/autoload
+.vim/bundle
 .vim/autoload/
 .vim/bundle/
 .netrwhist
