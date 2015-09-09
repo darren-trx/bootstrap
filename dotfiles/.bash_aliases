@@ -21,12 +21,3 @@ alias apt-get='sudo apt-get'
 
 # neatly display PATH env var (one entry per line)
 alias path='echo -e ${PATH//:/\\n}'
-
-# dropbox control script
-if [ -f "$HOME/dropbox.py" ]; then
-  alias dropbox="$HOME/dropbox.py"
-fi
-
-if [ -f "$HOME/.mygpg.sh" ]; then
-  alias mygpg="$HOME/.mygpg.sh"
-fi
