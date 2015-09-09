@@ -188,8 +188,7 @@ let mapleader = ";"
 nmap <silent> <leader>w :w!<CR>
 nmap <silent> <leader>q :q<CR>
 nmap <silent> <leader>e :E<CR>
-nmap <silent> <leader>p :lcd %:p:h<CR>:pwd<CR>
-nmap <silent> <leader>; :CtrlP<CR>
+nmap <silent> <leader>p :CtrlP<CR>
 nmap <silent> <leader>r :CtrlPMRU<CR>
 
 "shortcuts to enable/disable various features
@@ -198,6 +197,7 @@ nmap <silent> <leader>E :set expandtab!<CR>:set expandtab?<CR>
 nmap <silent> <leader>H :set hlsearch!<CR>:set hlsearch?<CR>
 nmap <silent> <leader>L :set list!<CR>
 nmap <silent> <leader>N :set number!<CR>
+nmap <silent> <leader>P :lcd %:p:h<CR>:pwd<CR>
 nmap <silent> <leader>R :set relativenumber!<CR>
 nmap <silent> <leader>S :windo set scrollbind!<CR>:set scrollbind?<CR>
 nmap <silent> <leader>W :set list!<CR>
