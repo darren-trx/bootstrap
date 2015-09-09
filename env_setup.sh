@@ -36,8 +36,19 @@ dotfiles --check
 . ~/.bash_aliases
 
 # Run mygpg script (will install itself to /usr/local/bin)
-./mygpg.sh
-type mygpg
+read -n1 -t10 -p "Install mygpg? (y/n): " INSTALL_MYGPG
+echo
+[ "$INSTALL_MYGPG" == "y" ] && ./mygpg.sh
 
-# TODO: read prompt to install ansible
-# TODO: read prompt to install vim plugins
+read -n1 -t10 -p "Install dropbox? (y/n): " INSTALL_DROPBOX
+echo
+[ "$INSTALL_DROPBOX" == "y" ] && ./dropbox_install.sh
+
+read -n1 -t10 -p "Install ansible? (y/n): " INSTALL_ANSIBLE
+echo
+[ "$INSTALL_ANSIBLE" == "y" ] && ./ansible_install.sh
+
+read -n1 -t10 -p "Install vim plugins? (y/n): " INSTALL_VIM_PLUGINS
+echo
+[ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh
+
