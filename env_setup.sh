@@ -40,10 +40,6 @@ read -n1 -t10 -p "Install mygpg? (y/n): " INSTALL_MYGPG
 echo
 [ "$INSTALL_MYGPG" == "y" ] && ./mygpg.sh
 
-read -n1 -t10 -p "Install dropbox? (y/n): " INSTALL_DROPBOX
-echo
-[ "$INSTALL_DROPBOX" == "y" ] && ./dropbox_install.sh
-
 read -n1 -t10 -p "Install ansible? (y/n): " INSTALL_ANSIBLE
 echo
 [ "$INSTALL_ANSIBLE" == "y" ] && ./ansible_install.sh
@@ -51,4 +47,8 @@ echo
 read -n1 -t10 -p "Install vim plugins? (y/n): " INSTALL_VIM_PLUGINS
 echo
 [ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh
+
+read -n1 -t10 -p "Install dropbox? (y/n): " INSTALL_DROPBOX
+echo
+[ "$INSTALL_DROPBOX" == "y" ] && ./dropbox_install.sh
 
