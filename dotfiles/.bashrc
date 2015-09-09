@@ -11,6 +11,8 @@ export VISUAL=vim
 export HISTSIZE=10000
 # avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
+# includ PID & date/time
+export HISTTIMEFORMAT='%F %T  '
 # append history on shell exit (logout) instead of overwriting history file
 shopt -s histappend
 # keep multi line commands together in history
