@@ -38,6 +38,9 @@ if exists("*pathogen#infect")
   let g:multi_cursor_next_key='m'
   let g:multi_cursor_quit_key='<Esc>'
   
+  " GnuPG
+  let g:GPGPreferArmor=1
+  let g:GPGDefaultRecipients=["darren.q@gmail.com"]
 endif
 
 "allow unsaved buffers to be hidden
