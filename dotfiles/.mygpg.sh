@@ -24,10 +24,10 @@ mygpg_add_key() {
 
   # flush the key after 5 hours, deleting any other gpg-del jobs first
   for i in "$(atq | cut -f1)"; do
-    at -c $i | grep -qow "~/mygpg.sh"
+    at -c $i | grep -qow "$HOME/.mygpg.sh"
     [ $? -gt 0 ] || atrm $i &>/dev/null
   done
-  echo "~/mygpg.sh -d" | at now + 300 minutes
+  echo "$HOME/.mygpg.sh -d" | at now + 300 minutes
 }
 
 case "$1" in

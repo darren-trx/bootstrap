@@ -27,6 +27,6 @@ if [ -f "$HOME/dropbox.py" ]; then
   alias dropbox="$HOME/dropbox.py"
 fi
 
-if [ -f "$HOME/mygpg.sh" ]; then
-  alias mygpg="$HOME/mygpg.sh"
+if [ -f "$HOME/.mygpg.sh" ]; then
+  alias mygpg="$HOME/.mygpg.sh"
 fi
