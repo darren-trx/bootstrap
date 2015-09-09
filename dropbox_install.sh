@@ -9,9 +9,11 @@ cd ~
 # tar xzf dropbox_${ARCH}.tar.gz
 
 # Download Dropbox using Python script
-wget "https://www.dropbox.com/download?dl=packages/dropbox.py" -O ~/dropbox.py
-chmod 755 ~/dropbox.py
-echo 'y' | ~/dropbox.py start -i
+wget "https://www.dropbox.com/download?dl=packages/dropbox.py" -O "$HOME/dropbox.py"
+chmod 755 "$HOME/dropbox.py"
+sudo mv -v "$HOME/dropbox.py" /usr/local/bin/dropbox
+
+echo 'y' | dropbox start -i
 # zombie dropbox daemon, no account linked yet
 killall dropbox
 
