@@ -32,13 +32,13 @@ done
 
 if [ -L "${VIM_HOME}/autoload" ]; then
   rm -v "${VIM_HOME}/autoload"
-else
+elif [ -e "${VIM_HOME}/autoload" ]; then
   mv -vf "${VIM_HOME}/autoload" "${VIM_HOME}/autoload.bak"
 fi
 
 if [ -L "${VIM_HOME}/bundle" ]; then
   rm -v "${VIM_HOME}/bundle"
-else
+elif [ -e "${VIM_HOME}/bundle" ]; then
   mv -vf "${VIM_HOME}/bundle" "${VIM_HOME}/bundle.bak"
 fi
 
