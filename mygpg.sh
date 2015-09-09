@@ -72,6 +72,8 @@ case "$1" in
       -s  symetrically encrypt <file> using AES256
       -r  run <file> with bash
       -a  add gpg key (encrypted or not)
-      -d  delete my gpg key"
+      -d  delete my gpg key from keychain
+      -f  show fingerprint of my gpg key
+      -l  list all loaded gpg keys"
     ;;
 esac
