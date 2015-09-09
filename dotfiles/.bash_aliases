@@ -22,4 +22,6 @@ alias apt-get='sudo apt-get'
 alias path='echo -e ${PATH//:/\\n}'
 
 # dropbox control script
-alias dropbox="$HOME/dropbox.py"
+if [ -f "$HOME/dropbox.py" ]; then
+  alias dropbox="$HOME/dropbox.py"
+fi

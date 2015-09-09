@@ -3,9 +3,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Custom dir/file colors
-# export LS_COLORS='di=1;36:fi=1:*.zip=33:*.iso=1;33:*.msi=1;32:*.gif=1;35:*.db=0;37:*.pdf=1;35'
-
 # Set default "full-fledged" editor
 # (Bash attempts to load $VISUAL before $EDITOR)
 export VISUAL=vim
@@ -46,7 +43,7 @@ fi
 
 # autostart dropbox daemon if it has been setup (dropbox alias)
 # and no dropbox processes are already running for this user
-if [ "$(which dropbox)" ]; then
+if [ "$(type -P dropbox)" ]; then
   if [ ! "$(pgrep dropbox -u $UID)" ]; then
     # dropbox start   # disabled by default
     : # null statement placehold
