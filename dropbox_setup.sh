@@ -5,11 +5,14 @@
 ########################################################
 
 dropbox start
-dropbox status
 dropbox lansync y
-dropbox exclude add Bookmarks Public Resume interfacelift
+echo "Status: $(dropbox status)"
 
-sleep 1s
-
+# exclude/filestatus must be run from within Dropbox dir
 cd ~/Dropbox
+dropbox exclude add Backgrounds Bookmarks Public
+sleep 1s
+echo
 dropbox filestatus
+echo
+dropbox exclude
