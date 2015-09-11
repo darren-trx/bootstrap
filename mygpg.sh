@@ -51,9 +51,22 @@ mygpg_add_key() {
   echo "$MYGPG_BIN -d" | at now + 300 minutes
 }
 
+mygpg_encrypt() {
+  FILE_IN="${1}"
+  FILE_OUT="${2}"
+  if [ "${FILE_OUT}" ]; then
+    if [ -d "${FILE_OUT}" ]; then
+      FILE_OUT="-o ${2}/${1}.asc"
+    else
+      FILE_OUT="-o ${2}.asc"
+    fi
+  fi
+  gpg --encrypt --armor ${FILE_OUT} -r ${MYGPG_EMAIL} "${FILE_IN}"
+}
+
 case "$1" in
   "-e")
-    gpg --encrypt --armor -r $MYGPG_EMAIL "$2";;
+    mygpg_encrypt "$2" "$3";;
   "-s")
     gpg --symmetric --cipher-algo AES256 --armor --verbose "$2";;
   "-r")
