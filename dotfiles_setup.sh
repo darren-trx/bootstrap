@@ -18,6 +18,11 @@ if [ -e "${DOTFILES_LINK}" ]; then
   rm -vf "${DOTFILES_LINK}"
 fi
 
+# backup .bashrc if it already exists
+if [ -f "${HOME}/.bashrc" ]; then
+  mv -vf "${HOME}/.bashrc" "${HOME}/.bashrc.bak"
+fi
+
 # symlink ~/.dotfilesrc manually initially
 ln -s "${DOTFILES_REPO}/.dotfilesrc" "${DOTFILES_LINK}"
 
