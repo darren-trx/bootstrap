@@ -15,11 +15,11 @@ DOTFILES_OPTS="$@"
 
 # delete ~/.dotfilesrc if it already exists
 if [ -e "${DOTFILES_LINK}" ]; then
-  rm -vf "${DOTFILES_LINK}"
+  rm -f "${DOTFILES_LINK}"
 fi
 
-# backup .bashrc if it already exists
-if [ -f "${HOME}/.bashrc" ]; then
+# backup .bashrc if it is not a symlink
+if [ ! -L "${HOME}/.bashrc" ]; then
   mv -vf "${HOME}/.bashrc" "${HOME}/.bashrc.bak"
 fi
 
