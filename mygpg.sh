@@ -64,6 +64,19 @@ mygpg_encrypt() {
   gpg --encrypt --armor ${FILE_OUT} -r ${MYGPG_EMAIL} "${FILE_IN}"
 }
 
+mygpg_gen_key() {
+  # if rng-tools is not installed, install it
+  [ "$(which rngd)" ] || sudo apt-get install -y rng-tools
+  
+  # if rng-tools is installed, generate entropy with it
+  if [ "$(which rngd)" ]; then
+    sudo rngd -r /dev/urandom
+  else
+    echo "rngd not found, generate entropy manually"
+  fi
+  gpg --gen-key
+}
+
 case "$1" in
   "-e")
     mygpg_encrypt "$2" "$3";;
@@ -71,6 +84,8 @@ case "$1" in
     gpg --symmetric --cipher-algo AES256 --armor --verbose "$2";;
   "-r")
     gpg -d "$2" 2>/dev/null | bash;;
+  "-g")
+    mygpg_gen_key;;
   "-a")
     mygpg_add_key "$2";;
   "-d")
@@ -84,6 +99,7 @@ case "$1" in
       -e  asymmetrically encrypt <file> using my gpg key
       -s  symetrically encrypt <file> using AES256
       -r  run <file> with bash
+      -g  generate gpg key
       -a  add gpg key (encrypted or not)
       -d  delete my gpg key from keychain
       -f  show fingerprint of my gpg key
