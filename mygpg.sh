@@ -98,13 +98,13 @@ case "$1" in
     gpg --list-keys && gpg --list-secret-keys;;
   *)
     echo "My GPG Key: $MYGPG_EMAIL $(mygpg_fp_key)
-    -e  asymmetrically encrypt <file> using my gpg key
-    -s  symetrically encrypt <file> using AES256
-    -r  run <file> by piping it into bash
+    -e  encrypt <file> using my gpg key
+    -s  encrypt <file> using AES256 and a password
+    -r  run <file> by decrypting & piping into bash
     -g  generate gpg key (installs rng-tools)
-    -i  import gpg key (can be encrypted)
-    -d  delete my gpg key from keychain
+    -i  import gpg key into keychain (.asc supported)
+    -d  delete my gpg key from keychain (secret & public)
     -f  show fingerprint of my gpg key
-    -l  list all loaded gpg keys"
+    -l  list all gpg keys loaded in keychain"
     ;;
 esac
