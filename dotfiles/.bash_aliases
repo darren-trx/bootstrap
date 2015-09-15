@@ -19,5 +19,7 @@ alias shred='shred -uv'  # -u remove file afterwards, -v show progress
 
 alias apt-get='sudo apt-get'
 
+alias ssh-github='ssh -T git@github.com'
+
 # neatly display PATH env var (one entry per line)
 alias path='echo -e ${PATH//:/\\n}'
