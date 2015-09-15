@@ -14,6 +14,7 @@ fi
 mygpg_fp_key() {
   gpg --fingerprint $MYGPG_EMAIL 2>/dev/null | awk -F'=' '/Key fingerprint/ {print $2}' | sed 's/ //g'
 }
+# remove any mygpg jobs in the at queue
 mygpg_clear_at() {
   ATQ="$(atq | cut -f1)"
   if [ "$ATQ" != "" ]; then
@@ -23,7 +24,7 @@ mygpg_clear_at() {
     done
   fi
 }
-mygpg_del_key() {
+mygpg_delete_key() {
   MYGPG_FP="$(mygpg_fp_key)"
   if [ "$MYGPG_FP" != "" ]; then
     echo "Deleting secret key for $MYGPG_EMAIL $MYGPG_FP"
@@ -35,7 +36,7 @@ mygpg_del_key() {
   fi
   mygpg_clear_at
 }
-mygpg_add_key() { 
+mygpg_import_key() { 
   echo "$1" | egrep -q "\.gpg$|\.asc$"
   if [ $? -eq 0 ]; then
     gpg -d "$1" | gpg --import
@@ -46,8 +47,9 @@ mygpg_add_key() {
   # trust this key ultimately (6)
   echo "$(mygpg_fp_key):6:" | gpg --import-ownertrust
   
-  # flush the key after 5 hours, deleting any existing at jobs first
+  # clear out any mygpg jobs from the at queue
   mygpg_clear_at
+  # schedule a new job to delete the key after 5 hours
   echo "$MYGPG_BIN -d" | at now + 300 minutes
 }
 
@@ -86,23 +88,23 @@ case "$1" in
     gpg -d "$2" 2>/dev/null | bash;;
   "-g")
     mygpg_gen_key;;
-  "-a")
-    mygpg_add_key "$2";;
+  "-i")
+    mygpg_import_key "$2";;
   "-d")
-    mygpg_del_key "$2";;
+    mygpg_delete_key "$2";;
   "-f")
     mygpg_fp_key;;
   "-l")
     gpg --list-keys && gpg --list-secret-keys;;
   *)
-    echo "  My GPG Key: $MYGPG_EMAIL $(mygpg_fp_key)
-      -e  asymmetrically encrypt <file> using my gpg key
-      -s  symetrically encrypt <file> using AES256
-      -r  run <file> with bash
-      -g  generate gpg key
-      -a  add gpg key (encrypted or not)
-      -d  delete my gpg key from keychain
-      -f  show fingerprint of my gpg key
-      -l  list all loaded gpg keys"
+    echo "My GPG Key: $MYGPG_EMAIL $(mygpg_fp_key)
+    -e  asymmetrically encrypt <file> using my gpg key
+    -s  symetrically encrypt <file> using AES256
+    -r  run <file> by piping it into bash
+    -g  generate gpg key (installs rng-tools)
+    -i  import gpg key (can be encrypted)
+    -d  delete my gpg key from keychain
+    -f  show fingerprint of my gpg key
+    -l  list all loaded gpg keys"
     ;;
 esac
