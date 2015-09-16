@@ -200,7 +200,7 @@ nmap <silent> <leader>p :CtrlP<CR>
 nmap <silent> <leader>r :CtrlPMRU<CR>
 
 "shortcuts to enable/disable various features
-nmap <silent> <leader>A :set ft=ansible<CR>
+nmap <silent> <leader>A :if (&ft=='ansible')<Bar>:set ft=ansible!<Bar>:else<Bar>:set ft=ansible<Bar>:endif<CR>
 nmap <silent> <leader>D :call ToggleDiff()<CR>
 nmap <silent> <leader>E :set expandtab!<CR>:set expandtab?<CR>
 nmap <silent> <leader>H :set hlsearch!<CR>:set hlsearch?<CR>
