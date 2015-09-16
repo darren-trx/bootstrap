@@ -41,6 +41,10 @@ if exists("*pathogen#infect")
   " GnuPG
   let g:GPGPreferArmor=1
   let g:GPGDefaultRecipients=["darren.q@gmail.com"]
+
+  " Ansible
+  let g:ansible_attribute_highlight = "ab"
+
 endif
 
 "allow unsaved buffers to be hidden
@@ -55,6 +59,7 @@ set nowrap
 filetype plugin indent on
 au FileType * :set shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 au FileType html,css :set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+au FileType yml,yaml :set ft=ansible
 "autoindent: copy indent level from previous line
 set autoindent
 "smarttab: at start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth space
@@ -195,6 +200,7 @@ nmap <silent> <leader>p :CtrlP<CR>
 nmap <silent> <leader>r :CtrlPMRU<CR>
 
 "shortcuts to enable/disable various features
+nmap <silent> <leader>A :set ft=ansible<CR>
 nmap <silent> <leader>D :call ToggleDiff()<CR>
 nmap <silent> <leader>E :set expandtab!<CR>:set expandtab?<CR>
 nmap <silent> <leader>H :set hlsearch!<CR>:set hlsearch?<CR>
