@@ -103,13 +103,14 @@ set scrolloff=2
 set noerrorbells
 "highlight current line
 set cursorline
-autocmd VimEnter * :hi CursorLine ctermbg=235 guibg=#333333
-autocmd InsertEnter * :hi CursorLine ctermbg=232 guibg=#111111 
-autocmd InsertLeave * :hi CursorLine ctermbg=235 guibg=#333333
-
+au VimEnter * :hi CursorLine ctermbg=235 guibg=#333333
+au InsertEnter * :hi CursorLine ctermbg=232 guibg=#111111 
+au InsertLeave * :hi CursorLine ctermbg=235 guibg=#333333
 "diff mode colors
-autocmd VimEnter * :hi DiffText ctermbg=Yellow ctermfg=Red cterm=none
-autocmd VimEnter * :hi DiffChange ctermbg=Yellow ctermfg=Black cterm=none
+au VimEnter * :hi DiffText ctermbg=Yellow ctermfg=Red cterm=none guibg=Yellow guifg=Red gui=none
+au VimEnter * :hi DiffChange ctermbg=Yellow ctermfg=Black cterm=none guibg=Yellow guifg=Black gui=none
+au VimEnter * :hi DiffAdd ctermbg=Black guibg=Black
+au VimEnter * :hi DiffDelete ctermbg=Black guibg=Black
 
 "ignore whitespace in diff mode
 if &diff
@@ -135,9 +136,19 @@ if has("gui_running")
 
 else
   "pretty colors in non-gui DOS/cygwin terminals (using ConEmu)
-  if $TERM=="cygwin" || has("win32")
+  "if $TERM=="cygwin" || has("win32")
+  if $ConEmuANSI=='ON'
     set term=pcansi
     set t_Co=256
+  else
+    "cygwin without ConEmu or in ConEmu ssh
+    if $TERM=='cygwin'
+      autocmd VimEnter * :set t_Co=8
+      colorscheme miro8
+    "PuTTY, *nix ssh (not gVim, ConEMU, or cygwin)
+    else
+      "leave term, t_Co alone, use colorscheme set above
+    endif
   endif
 endif
 
@@ -177,6 +188,8 @@ endfunction
 " 25%  move to a location based on percentage
 " :g/word/  show all line matches in a pane
 " :%s/old/new/gc  replace text globally with confirmation
+" w/W/b/B  move forward/backword by word (W/B includes non-alphanumeric chars)
+" dw/dW/yw/yW  delete/yank word (W includes non-alphanumeric chars)
 " do  diff get changes from other window into current window
 " dp  diff put changes from current window into other window
 " ]c  diff jump to next change
