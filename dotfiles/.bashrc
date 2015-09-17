@@ -3,6 +3,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Custom dir/file colors
+# export LS_COLORS='di=1;36:fi=1:*.zip=33:*.iso=1;33:*.msi=1;32:*.gif=1;35:*.db=0;37:*.pdf=1;35'
+
 # Set default "full-fledged" editor
 # (Bash attempts to load $VISUAL before $EDITOR)
 export VISUAL=vim
@@ -11,16 +14,12 @@ export VISUAL=vim
 export HISTSIZE=10000
 # avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
-# includ PID & date/time
+# include PID & date/time
 export HISTTIMEFORMAT='%F %T  '
 # append history on shell exit (logout) instead of overwriting history file
 shopt -s histappend
 # keep multi line commands together in history
 shopt -s cmdhist
-
-# Correct small typing mistakes of cd
-shopt -s cdspell
-
 # Append every command to history individually and immediately
 # (allowing real-time history sharing between tmux panes)
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
