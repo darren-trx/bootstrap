@@ -3,6 +3,11 @@
 # YADSWS
 # Yet Another Dotfiles Symlinker, With Color!
 
+if [ "$(pwd)" != "${HOME}/bootstrap" ]; then
+  echo "dotfiles script must be run from ${HOME}/bootstrap"
+  exit 1
+fi
+
 DOTFILES_BKP_DIR="${HOME}/dotfiles_backup"
 DOTFILES_GIT_DIR="${HOME}/bootstrap/dotfiles"
 
