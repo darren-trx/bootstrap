@@ -8,7 +8,7 @@ set nocompatible
 runtime! autoload/pathogen.vim
 if exists("*pathogen#infect")
   execute pathogen#infect()
-  
+
   "### CtrlP
   " <Ctrl-P> fuzzy finder file opener
   " <Ctrl-v>/<Ctrl-x> open file in vert/horiz split 
@@ -180,20 +180,29 @@ endfunction
 "=============================================
 " Key Binding Cheat Sheat
 "=============================================
-" w/b W/B move by word
-"  .   repeat previous edit
-"  @:  repeat previous command
-"  q:  show command history
-" * #  search for word under cursor (forward/backward)
-" 25%  move to a location based on percentage
-" :g/word/  show all line matches in a pane
-" :%s/old/new/gc  replace text globally with confirmation
-" w/W/b/B  move forward/backword by word (W/B includes non-alphanumeric chars)
-" dw/dW/yw/yW  delete/yank word (W includes non-alphanumeric chars)
-" do  diff get changes from other window into current window
-" dp  diff put changes from current window into other window
-" ]c  diff jump to next change
-" [c  diff jump to previous change
+" w W b B         Move by word (W/B includes non-alphanumeric chars)
+" dw dW yw yW     Delete/Yank word (W includes non-alphanumeric chars)
+" :g/word/        Show all line matches in a pane at bottom
+" :%s/old/new/gc  Replace text globally with confirmation
+" 25%             Move to line based on percentage of file
+" =               (Visual mode) Indent lines to same level
+
+" ma 'a         Mark line as 'a' / Move to line marked 'a'
+" '[ ']         Marks for First/Last line (Automatic)
+" [' ]'         Jump to Previous/Next lowercase mark
+" :marks        Show all marks
+" :marks a-z    Show lowercase marks
+" :delmarks!    Delete lowercase marks
+" :delm A-Z0-9  Delete all other marks
+
+"  .    Repeat previous edit
+"  @:   Repeat previous command
+"  q:   Show command history
+
+" do  (diff mode) Get changes from other window into current window
+" dp  (diff mode) Put changes from current window into other window
+" ]c  (diff mode) Jump to next change
+" [c  (diff mode) Jump to previous change
 
 "paste clipboard without indenting
 inoremap <F12> <Esc>:set paste!<CR>:set paste?<CR>i
@@ -202,6 +211,14 @@ nnoremap <F12> :set paste!<CR>:set paste?<CR>
 "quick indentation in visual mode
 vmap <tab> >gv
 vmap <s-tab> <gv
+
+" remap asterisk so it just highlights word currently under cursor
+" instead of moving to the next occurrence
+nnoremap * *``
+
+" remap o/O so they go back into Normal mode
+"nnoremap o o<Esc>
+"nnoremap O O<Esc>
 
 let mapleader = ";"
 
@@ -218,10 +235,12 @@ nmap <silent> <leader>D :call ToggleDiff()<CR>
 nmap <silent> <leader>E :set expandtab!<CR>:set expandtab?<CR>
 nmap <silent> <leader>H :set hlsearch!<CR>:set hlsearch?<CR>
 nmap <silent> <leader>L :set list!<CR>
+nmap <silent> <leader>M :marks a-z<CR>
 nmap <silent> <leader>N :set number!<CR>
 nmap <silent> <leader>P :lcd %:p:h<CR>:pwd<CR>
 nmap <silent> <leader>R :set relativenumber!<CR>
 nmap <silent> <leader>S :windo set scrollbind!<CR>:set scrollbind?<CR>
+nmap <silent> <leader>T :retab<CR>
 nmap <silent> <leader>W :set list!<CR>
 
 
