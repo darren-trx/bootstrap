@@ -23,22 +23,22 @@ BBlue=`tput setaf 12`
 Reset=`tput sgr0`
 
 status_msg() {
-  local RESULT=""
+  local MSG="$1"
+  local COL=""
   if [ "$2" ]; then
     case "$2" in
-      0) RESULT="${Green}OK${Reset}" ;;
-      1) RESULT="${Red}FAIL${Reset}" ;;
-      *) RESULT="${Orange}??${Reset}" ;;
+      0) COL="${Green}" ;;
+      1) COL="${Red}" ;;
+   skip) COL="${Grey}" ;;
+      *) COL="${Blue}" ;;
     esac
-    echo -n " ... ${1} [ ${RESULT} ]"
-  else
-    echo -n " ... ${1}"
   fi
+  echo -n " ${COL}>> ${1} ${Reset}"
 }
 
 for DF in $( ls -A "${DOTFILES_GIT_DIR}" )
 do
-  echo -n "${Yellow}${DF}${Reset}"
+  echo -n "${Yellow}${DF}${Reset}" | awk '{ printf "%-25s", $1}'
   RET=0
   # if the file already exists in ~/
     # if the existing file is a symlink, just remove it
@@ -50,7 +50,7 @@ do
         status_msg "Deleting existing symlink" "$RET"
       else
         # file is a sym link pointing to the right location
-        status_msg "${Grey}Matches existing symlink, skipping${Reset}"
+        status_msg "Matches existing symlink" "skip"
         RET=2
       fi
     # if the existing file is not a symlink, back it up first
