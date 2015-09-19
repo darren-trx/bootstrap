@@ -81,4 +81,4 @@ do
 done
 
 # Reload bashrc automatically
-source "${HOME}/.bashrc"
+. "${HOME}/.bashrc"

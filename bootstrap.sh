@@ -35,7 +35,7 @@ else
 fi
 read -n1 -t10 -p "### ~/.vim-plugins - $VIM_PLUGINS - Install/Update? (y/n): " INSTALL_VIM_PLUGINS
 echo
-[ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh --refresh
+[ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh
 echo
 
 ### GITHUB
