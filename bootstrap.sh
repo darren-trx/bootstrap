@@ -1,13 +1,41 @@
 #!/bin/bash
 
+Red=`tput setaf 1`
+Reset=`tput sgr0`
+
 # abort if current dir is not ~/bootstrap
-[ "$(pwd)" == "${HOME}/bootstrap" ] || ( echo "not running from ${HOME}/bootstrap, aborting" && exit 1 )
+if [ "$(pwd)" != "${HOME}/bootstrap" ]; then
+  echo "${Red}Script not being run from ${HOME}/bootstrap, aborting${Reset}"
+  exit 1
+fi
 
 
 ### DOTFILES
 read -n1 -t10 -p "### Dotfiles - Copy/Update? (y/n): " INSTALL_DOTFILES
 echo
 [ "$INSTALL_DOTFILES" == "y" ] && sudo ./dotfiles_setup.sh
+echo
+
+### MYGPG
+diff -q ./mygpg.sh /usr/local/bin/mygpg
+if [ $? -eq 0 ]; then
+  echo "#### MyGPG - Up to date"
+else
+  read -n1 -t10 -p "### MyGPG - Copy/Update? (y/n): " INSTALL_MYGPG
+  echo
+  [ "$INSTALL_MYGPG" == "y" ] && sudo cp -vf ./mygpg.sh /usr/local/bin/mygpg
+fi
+echo
+
+### VIM PLUGINS
+if [ -d "${HOME}/.vim-plugins" ]; then
+  VIM_PLUGINS='Exists'
+else
+  VIM_PLUGINS='Not found'
+fi
+read -n1 -t10 -p "### ~/.vim-plugins - $VIM_PLUGINS - Install/Update? (y/n): " INSTALL_VIM_PLUGINS
+echo
+[ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh --refresh
 echo
 
 ### GITHUB
@@ -19,18 +47,6 @@ fi
 read -n1 -t10 -p "### GitHub Key - $GITHUB_KEY - Install/Update? (y/n): " INSTALL_GITHUB
 echo
 [ "$INSTALL_GITHUB" == "y" ] && ./github_key_setup.sh
-echo
-
-
-### MYGPG
-diff -q ./mygpg.sh /usr/local/bin/mygpg
-if [ $? -eq 0 ]; then
-  echo "#### MyGPG - Up to date"
-else
-  read -n1 -t10 -p "### MyGPG - Copy/Update? (y/n): " INSTALL_MYGPG
-  echo
-  [ "$INSTALL_MYGPG" == "y" ] && sudo cp -vf ./mygpg.sh /usr/local/bin/mygpg
-fi
 echo
 
 ### PIP
@@ -53,17 +69,6 @@ fi
 read -n1 -t10 -p "### Ansible - $ANSIBLE - Install/Update? (y/n): " INSTALL_ANSIBLE
 echo
 [ "$INSTALL_ANSIBLE" == "y" ] && ./ansible_install.sh
-echo
-
-### VIM PLUGINS
-if [ -d "${HOME}/.vim-plugins" ]; then
-  VIM_PLUGINS='Exists'
-else
-  VIM_PLUGINS='Not found'
-fi
-read -n1 -t10 -p "### ~/.vim-plugins - $VIM_PLUGINS - Install/Update? (y/n): " INSTALL_VIM_PLUGINS
-echo
-[ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh
 echo
 
 ### DROPBOX

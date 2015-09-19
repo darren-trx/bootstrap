@@ -38,7 +38,7 @@ status_msg() {
 
 for DF in $( ls -A "${DOTFILES_GIT_DIR}" )
 do
-  echo -n "${Yellow}${DF}${Reset}" | awk '{ printf "%-25s", $1}'
+  echo -n "${Yellow}${DF}${Reset}" | awk '{ printf "%-30s", $1}'
   RET=0
   # if the file already exists in ~/
     # if the existing file is a symlink, just remove it
