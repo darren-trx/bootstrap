@@ -24,12 +24,17 @@ if exists("*pathogen#infect")
   let g:airline#extensions#default#layout = [ [ 'a', 'b', 'c' ], [ 'x', 'y', 'z' ] ]
   
   "### Indent-Guides
+  let g:indent_guides_enable_on_vim_startup = 1
+  " 30 indent levels (default) can cause lag and seems excessive
+  let g:indent_guides_indent_levels = 8
   let g:indent_guides_auto_colors = 0
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3F3F3F ctermbg=237
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2A2A2A ctermbg=235
-  autocmd FileType * call indent_guides#enable()
+  augroup indent_guides_augroup
+    autocmd!
+    au VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3F3F3F ctermbg=237
+    au VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2A2A2A ctermbg=235
+  augroup END
 
-  " Multi-Cursor
+  "### Multi-Cursor
   let g:multi_cursor_use_default_mapping=0
   let g:multi_cursor_start_key=';m'
   "next_key
@@ -38,12 +43,16 @@ if exists("*pathogen#infect")
   let g:multi_cursor_next_key='m'
   let g:multi_cursor_quit_key='<Esc>'
   
-  " GnuPG
+  "### GnuPG
   let g:GPGPreferArmor=1
   let g:GPGDefaultRecipients=["darren.q@gmail.com"]
 
-  " Ansible
+  "### Ansible
   let g:ansible_attribute_highlight = "ab"
+  " allow yaml/yml files to indicate they are ansible playbooks
+  " by putting # vim:ft=ansible at beginning or end of file
+  au FileType yaml,yml :set modeline
+
 
 endif
 
@@ -59,7 +68,7 @@ set nowrap
 filetype plugin indent on
 au FileType * :set shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 au FileType html,css :set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-au FileType yml,yaml :set ft=ansible
+
 "autoindent: copy indent level from previous line
 set autoindent
 "smarttab: at start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth space
@@ -101,16 +110,24 @@ set whichwrap=b,s,h,l,<,>,[,]
 set scrolloff=2
 "disable audio error alerts
 set noerrorbells
+
 "highlight current line
 set cursorline
-au VimEnter * :hi CursorLine ctermbg=235 guibg=#333333
-au InsertEnter * :hi CursorLine ctermbg=232 guibg=#111111 
-au InsertLeave * :hi CursorLine ctermbg=235 guibg=#333333
+augroup cursor_line_colors_augroup
+  autocmd!
+  au VimEnter * :hi CursorLine ctermbg=235 guibg=#333333
+  au InsertEnter * :hi CursorLine ctermbg=232 guibg=#111111 
+  au InsertLeave * :hi CursorLine ctermbg=235 guibg=#333333
+augroup END
+
 "diff mode colors
-au VimEnter * :hi DiffText ctermbg=Yellow ctermfg=Red cterm=none guibg=Yellow guifg=Red gui=none
-au VimEnter * :hi DiffChange ctermbg=Yellow ctermfg=Black cterm=none guibg=Yellow guifg=Black gui=none
-au VimEnter * :hi DiffAdd ctermbg=Black guibg=Black
-au VimEnter * :hi DiffDelete ctermbg=Black guibg=Black
+augroup diff_mode_colors_augroup
+  autocmd!
+  au VimEnter * :hi DiffText ctermbg=Yellow ctermfg=Red cterm=none guibg=Yellow guifg=Red gui=none
+  au VimEnter * :hi DiffChange ctermbg=Yellow ctermfg=Black cterm=none guibg=Yellow guifg=Black gui=none
+  au VimEnter * :hi DiffAdd ctermbg=Black guibg=Black
+  au VimEnter * :hi DiffDelete ctermbg=Black guibg=Black
+augroup END
 
 "ignore whitespace in diff mode
 if &diff
@@ -234,6 +251,7 @@ nmap <silent> <leader>A :if (&ft=='ansible')<Bar>:set ft=ansible!<Bar>:else<Bar>
 nmap <silent> <leader>D :call ToggleDiff()<CR>
 nmap <silent> <leader>E :set expandtab!<CR>:set expandtab?<CR>
 nmap <silent> <leader>H :set hlsearch!<CR>:set hlsearch?<CR>
+nmap <silent> <leader>I :call indent_guides#toggle()<CR>
 nmap <silent> <leader>L :set list!<CR>
 nmap <silent> <leader>M :marks a-z<CR>
 nmap <silent> <leader>N :set number!<CR>
