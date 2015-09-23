@@ -53,7 +53,6 @@ if exists("*pathogen#infect")
   " by putting # vim:ft=ansible at beginning or end of file
   au FileType yaml,yml :set modeline
 
-
 endif
 
 "allow unsaved buffers to be hidden
@@ -68,7 +67,8 @@ set nowrap
 filetype plugin indent on
 au FileType * :set shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 au FileType html,css :set shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-
+"au FileType ansible :set indentkeys=
+au FileType ansible :set indentkeys-=*<Return>
 "autoindent: copy indent level from previous line
 set autoindent
 "smarttab: at start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth space
