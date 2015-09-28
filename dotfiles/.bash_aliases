@@ -23,3 +23,5 @@ alias ssh-github='ssh -T git@github.com'
 
 # neatly display PATH env var (one entry per line)
 alias path='echo -e ${PATH//:/\\n}'
+
+alias apv='gpg -q -d vault.asc 2>/dev/null | ansible-playbook --vault-password-file=/bin/cat'
