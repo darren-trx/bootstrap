@@ -13,7 +13,7 @@ fi
 ### DOTFILES
 read -n1 -t10 -p "### Dotfiles - Copy/Update? (y/n): " INSTALL_DOTFILES
 echo
-[ "$INSTALL_DOTFILES" == "y" ] && sudo ./dotfiles_setup.sh
+[ "$INSTALL_DOTFILES" == "y" ] && ./dotfiles_setup.sh
 echo
 
 ### MYGPG
