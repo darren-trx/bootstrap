@@ -79,6 +79,3 @@ do
   echo
 
 done
-
-# Reload bashrc automatically
-. "${HOME}/.bashrc"
