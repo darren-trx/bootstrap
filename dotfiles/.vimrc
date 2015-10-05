@@ -203,6 +203,7 @@ endfunction
 " :%s/old/new/gc  Replace text globally with confirmation
 " 25%             Move to line based on percentage of file
 " =               (Visual mode) Indent lines to same level
+" <Ctrl-w> HJKL   Move panes around
 
 " ma 'a         Mark line as 'a' / Move to line marked 'a'
 " '[ ']         Marks for First/Last line (Automatic)
