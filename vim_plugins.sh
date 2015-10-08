@@ -12,6 +12,7 @@ plugin["vim-gitgutter"]="https://github.com/airblade/vim-gitgutter"
 plugin["vim-fugitive"]="https://github.com/tpope/vim-fugitive"
 plugin["vim-gnupg"]="https://github.com/jamessan/vim-gnupg"
 plugin["ansible-vim"]="https://github.com/pearofducks/ansible-vim"
+plugin["undotree"]="https://github.com/mbbill/undotree"
 
 VIM_HOME="${HOME}/.vim"
 VIM_PLUGINS="${HOME}/.vim-plugins"
