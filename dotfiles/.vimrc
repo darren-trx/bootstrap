@@ -173,13 +173,21 @@ endif
 "Temp folders
 if has('win32') || has('win64')
   let $TMP="C:/TEMP"
-  set directory=$TMP
-  set backupdir=$TMP
-  set undodir=$TMP
 else
-  set directory=/tmp
-  set backupdir=/tmp
-  set undodir=/tmp
+  let $TMP="/tmp"
+endif
+set directory=$TMP
+set backupdir=$TMP
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand($HOME . '/.vim-undodir')
+    " Create dirs
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+    set undolevels=1000
+    set undoreload=10000 
 endif
 
 "Compare original to unsaved version
