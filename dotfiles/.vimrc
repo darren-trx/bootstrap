@@ -233,6 +233,9 @@ endfunction
 inoremap <F12> <Esc>:set paste!<CR>:set paste?<CR>i
 nnoremap <F12> :set paste!<CR>:set paste?<CR>
 
+"turn off whitespace character listing and line numbers (for clean copying)
+nnoremap <F11> :set list!<CR>:set number!<CR>
+
 "quick indentation in visual mode
 vmap <tab> >gv
 vmap <s-tab> <gv
@@ -247,6 +250,10 @@ nnoremap * *``
 
 let mapleader = ";"
 
+"copy visual mode selection to OS clipboard (works well with Shift-v)
+vnoremap <S-c> "*y
+
+"turn off highlighting
 nmap <silent> <leader>* :set hlsearch!<CR>:set hlsearch?<CR>
 
 "shortcuts to save/quit/file explorer/show path
