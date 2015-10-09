@@ -210,15 +210,13 @@ endfunction
 " dw dW yw yW     Delete/Yank word (W includes non-alphanumeric chars)
 " :g/word/        Show all line matches in a pane at bottom
 " :%s/old/new/gc  Replace text globally with confirmation
-" 25%             Move to line based on percentage of file
+" 25%             Jump to line based on percentage of file
+" { }             Jump to prev/next empty line
 " =               (Visual mode) Indent lines to same level
-" <Ctrl-w> HJKL   Move panes around
 
 " ma 'a         Mark line as 'a' / Move to line marked 'a'
-" '[ ']         Marks for First/Last line (Automatic)
 " [' ]'         Jump to Previous/Next lowercase mark
 " :marks        Show all marks
-" :marks a-z    Show lowercase marks
 " :delmarks!    Delete lowercase marks
 " :delm A-Z0-9  Delete all other marks
 
@@ -287,14 +285,9 @@ nmap <silent> <leader>- :sp<CR>
 nmap <silent> <leader>\ :vs<CR>
 nmap <silent> <leader>] :if winnr('$')>1<Bar>:wincmd w<Bar>:else<Bar>:bnext<Bar>:endif<CR>
 nmap <silent> <leader>[ :if winnr('$')>1<Bar>:wincmd W<Bar>:else<Bar>:bprev<Bar>:endif<CR>
+nmap <silent> <leader>} :bnext<CR>
+nmap <silent> <leader>{ :bprev<CR>
 nmap <silent> <leader>b :buffers<CR>:b
 nmap <silent> <leader>x :bdelete<CR>
-nmap <silent> <leader>n :enew<CR>
 nmap <silent> <leader>h :hide<CR>
 nmap <silent> <leader>o :only<CR>
-nmap <silent> <leader>0 :b0<CR>
-nmap <silent> <leader>1 :b1<CR>
-nmap <silent> <leader>2 :b2<CR>
-nmap <silent> <leader>3 :b3<CR>
-nmap <silent> <leader>4 :b4<CR>
-nmap <silent> <leader>5 :b5<CR>
