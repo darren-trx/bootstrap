@@ -296,5 +296,11 @@ nmap <silent> <leader>} :bnext<CR>
 nmap <silent> <leader>{ :bprev<CR>
 nmap <silent> <leader>b :buffers<CR>:b
 nmap <silent> <leader>x :bdelete<CR>
+nmap <silent> <leader>n :enew<CR>
 nmap <silent> <leader>h :hide<CR>
 nmap <silent> <leader>o :only<CR>
+
+nmap <silent> <leader>tn :tabnew<CR>
+nmap <silent> <leader>tc :tabclose<CR>
+nmap <silent> <leader>t] :tabnext<CR>
+nmap <silent> <leader>t[ :tabprev<CR>
