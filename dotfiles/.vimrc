@@ -229,6 +229,20 @@ endfunction
 " ]c  (diff mode) Jump to next change
 " [c  (diff mode) Jump to previous change
 
+
+"gVim copy/cut/paste/select all
+if has("gui_running")
+  " Copy
+  vnoremap <C-c> "*y
+  " Cut
+  vnoremap <C-x> "*x
+  " Paste
+  imap <C-v> <S-Ins>
+  nmap <C-v> i<S-Ins>
+  " Select all
+  nmap <C-a> ggVG
+endif
+
 "paste clipboard without indenting
 inoremap <F12> <Esc>:set paste!<CR>:set paste?<CR>i
 nnoremap <F12> :set paste!<CR>:set paste?<CR>
@@ -249,9 +263,6 @@ nnoremap * *``
 "nnoremap O O<Esc>
 
 let mapleader = ";"
-
-"copy visual mode selection to OS clipboard (works well with Shift-v)
-vnoremap <S-c> "*y
 
 "turn off highlighting
 nmap <silent> <leader>* :set hlsearch!<CR>:set hlsearch?<CR>
