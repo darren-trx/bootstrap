@@ -8,8 +8,10 @@ dropbox start
 dropbox lansync y
 echo "Status: $(dropbox status)"
 
+sleep 3s
+
 # exclude/filestatus must be run from within Dropbox dir
-cd ~/Dropbox
+cd "${HOME}/Dropbox"
 dropbox exclude add Backgrounds Bookmarks Public
 sleep 1s
 echo
