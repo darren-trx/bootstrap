@@ -9,11 +9,6 @@ function start_agent {
   ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
   chmod 600 "${SSH_ENV}"
   . "${SSH_ENV}" > /dev/null
-
-  local SSH_RUNNING_PID=`pgrep ssh-agent -u $UID`
-  if [ "$SSH_RUNNING_PID" == "${SSH_AGENT_PID}" ]; then
-    echo " OK ... PID ${SSH_AGENT_PID}"
-  fi
 }
 
 # if SSH_ENV file exists, but the PID it refers to
@@ -28,13 +23,7 @@ else
   start_agent
 fi
 
-# check if ssh agent is misbehaving
-SSH_RUNNING_PID=`pgrep ssh-agent -u $UID`
-if [ "${SSH_RUNNING_PID}" != "${SSH_AGENT_PID}" ]; then
-  # are multiple ssh agents open?
-  if [ `echo ${SSH_RUNNING_PID} | wc -w` -gt 1 ]; then
-    echo "You have multiple ssh agents running"
-  else
-    echo "ssh agent PID does not match ~/.ssh/env"
-  fi
+# Advise if multiple ssh agents are running
+if [ $(ps -ef | grep ssh-agent | wc -l) -gt 1 ]; then
+    echo "Multiple ssh-agent processes are running"
 fi
