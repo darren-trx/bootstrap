@@ -29,7 +29,8 @@ if [ "$GIT_PS1_VARTYPE" != "function" ]; then
   if [ -f ~/.git-prompt.sh ]; then 
     source ~/.git-prompt.sh
   else
-    echo "__git_ps1 not defined and .git-prompt.sh not found"
+    echo "__git_ps1 not defined and ~/.git-prompt.sh not found - to download it:"
+    echo "curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.sh"
   fi
 fi
 
