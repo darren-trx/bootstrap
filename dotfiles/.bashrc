@@ -24,6 +24,15 @@ shopt -s cmdhist
 # (allowing real-time history sharing between tmux panes)
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+GIT_PS1_VARTYPE=`type __git_ps1 2>/dev/null | awk '(NR==1){print $NF}'`
+if [ "$GIT_PS1_VARTYPE" != "function" ]; then
+  if [ -f ~/.git-prompt.sh ]; then 
+    source ~/.git-prompt.sh
+  else
+    echo "__git_ps1 not defined and .git-prompt.sh not found"
+  fi
+fi
+
 # Git auto-completion, coloring, and branch hints
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
