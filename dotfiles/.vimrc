@@ -53,8 +53,6 @@ if exists("*pathogen#infect")
   " by putting # vim:ft=ansible at beginning or end of file
   au FileType yaml,yml :set modeline
 
-  "### UndoTree
-  let g:undotree_SetFocusWhenToggle=1
 endif
 
 "allow unsaved buffers to be hidden
@@ -206,6 +204,9 @@ endfunction
 "=============================================
 " Key Binding Cheat Sheat
 "=============================================
+" <C-w> HJKL      Move pane left/down/up/right
+" <C-w> -+<>      Resize pane by optional # ie.  <C-w>10+ 
+
 " w W b B         Move by word (W/B includes non-alphanumeric chars)
 " dw dW yw yW     Delete/Yank word (W includes non-alphanumeric chars)
 " :g/word/        Show all line matches in a pane at bottom
@@ -268,12 +269,11 @@ let mapleader = ";"
 nmap <silent> <leader>* :set hlsearch!<CR>:set hlsearch?<CR>
 
 "shortcuts to save/quit/file explorer/show path
-nmap <silent> <leader>w :w!<CR>
+nmap <silent> <leader>w :w<CR>
 nmap <silent> <leader>q :q<CR>
 nmap <silent> <leader>e :E<CR>
 nmap <silent> <leader>p :CtrlP<CR>
 nmap <silent> <leader>r :CtrlPMRU<CR>
-nmap <silent> <leader>u :UndotreeToggle<CR>
 "m is used by multi-cursor
 
 "shortcuts to enable/disable various features
@@ -281,35 +281,36 @@ nmap <silent> <leader>A :if (&ft=='ansible')<Bar>:set ft=ansible!<Bar>:else<Bar>
 nmap <silent> <leader>D :call ToggleDiff()<CR>
 nmap <silent> <leader>E :set expandtab!<CR>:set expandtab?<CR>
 nmap <silent> <leader>I :call indent_guides#toggle()<CR>
-nmap <silent> <leader>H <C-w>H
-nmap <silent> <leader>J <C-w>J
-nmap <silent> <leader>K <C-w>K
-nmap <silent> <leader>L <C-w>L
 nmap <silent> <leader>M :marks a-z<CR>
-nmap <silent> <leader>N :set number!<CR>
 nmap <silent> <leader>O :DiffOrig<CR>
-nmap <silent> <leader>Q :qa!<CR>
 nmap <silent> <leader>P :lcd %:p:h<CR>:pwd<CR>
+nmap <silent> <leader>Q :qa!<CR>
 nmap <silent> <leader>R :retab<CR>
 nmap <silent> <leader>S :windo set scrollbind!<CR>:set scrollbind?<CR>
-"[W]hitespace
+
+"Hide Line [N]umbers
+nmap <silent> <leader>N :set number!<CR>
+"Hide [W]hitespace Characters
 nmap <silent> <leader>W :set list!<CR>
 
 " switch split layout between vertical and horizontal
 let sp = 0
 nnoremap <silent> <leader><Space> :let sp=!sp<Bar>:if sp<Bar>:vertical ball<Bar>:else<Bar>:ball<Bar>:endif<CR>
 
-nmap <silent> <leader>- :sp<CR>
-nmap <silent> <leader>\ :vs<CR>
+nmap <silent> <leader>s :sp<CR>
+nmap <silent> <leader>v :vs<CR>
+
 nmap <silent> <leader>] :if winnr('$')>1<Bar>:wincmd w<Bar>:else<Bar>:bnext<Bar>:endif<CR>
 nmap <silent> <leader>[ :if winnr('$')>1<Bar>:wincmd W<Bar>:else<Bar>:bprev<Bar>:endif<CR>
+
+nmap <silent> <leader>n :enew<CR>
+nmap <silent> <leader>h :hide<CR>
+nmap <silent> <leader>o :only<CR>
+
 nmap <silent> <leader>} :bnext<CR>
 nmap <silent> <leader>{ :bprev<CR>
 nmap <silent> <leader>b :buffers<CR>:b
 nmap <silent> <leader>x :bdelete<CR>
-nmap <silent> <leader>n :enew<CR>
-nmap <silent> <leader>h :hide<CR>
-nmap <silent> <leader>o :only<CR>
 
 nmap <silent> <leader>tn :tabnew<CR>
 nmap <silent> <leader>tc :tabclose<CR>
