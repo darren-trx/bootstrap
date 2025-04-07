@@ -39,11 +39,6 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
-# git completion & prompt no longer seem necessary
-#if [ -f ~/git-prompt.sh ]; then source ~/git-prompt.sh; fi
-#if [ -f ~/git-completion.bash ]; then source ~/git-completion.bash; fi
-#if [ -f ~/docker-completion.bash ]; then source ~/docker-completion.bash; fi
-
 if [ -f ~/.bash_ssh_agent ]; then source ~/.bash_ssh_agent; fi
 if [ -f ~/.bash_aliases ]; then source ~/.bash_aliases; fi
 if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -52,14 +47,14 @@ elif [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
-# autostart dropbox daemon if it has been setup (dropbox alias)
-# and no dropbox processes are already running for this user
-if [ "$(type -P dropbox)" ]; then
-  if [ ! "$(pgrep dropbox -u $UID)" ]; then
-    # dropbox start   # disabled by default
-    : # null statement placehold
-  fi
-fi
+#if [ -f ~/docker-completion.bash ]; then source ~/docker-completion.bash; fi
+
+# fuzzy finder
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# homebrew
+[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 
 # PS1 variables, functions, etc.
 Color_Off="\[\033[0m\]"

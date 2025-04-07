@@ -24,6 +24,15 @@ else
 fi
 
 # Advise if multiple ssh agents are running
-if [ $(ps -ef | grep ssh-agent | wc -l) -gt 1 ]; then
-    echo "Multiple ssh-agent processes are running"
+SSH_AGENT_COUNT=$(pgrep ssh-agent | wc -l)
+
+if [[ $SSH_AGENT_COUNT -lt 1 ]]; then
+  echo "ssh-agent is not running"
+
+elif [[ $SSH_AGENT_COUNT -eq 1 ]]; then
+  echo "ssh-agent is running - $(pgrep ssh-agent)"
+
+elif [[ $SSH_AGENT_COUNT -gt 1 ]]; then
+  echo "Multiple ssh-agent processes are running"
+  pgrep ssh-agent
 fi
