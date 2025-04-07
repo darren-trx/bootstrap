@@ -33,6 +33,31 @@ echo
 [ "$INSTALL_DOTFILES" == "y" ] && ./dotfiles_nix.sh
 echo
 
+
+### VIM PLUGINS
+if [ -d "${HOME}/.vim-plugins" ]; then
+  VIM_PLUGINS="${Green}Exists${Reset}"
+else
+  VIM_PLUGINS="${Red}Not found${Reset}"
+fi
+read -n1 -t10 -p "${Yellow}Vim Plugins${Reset}   $VIM_PLUGINS   Install/Update? (y/n): " INSTALL_VIM_PLUGINS
+echo
+[ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh
+echo
+
+
+### GITHUB
+if [ -f "${HOME}/.ssh/github_rsa" ]; then
+  GITHUB_KEY="${Green}Exists${Reset}"
+else
+  GITHUB_KEY="${Red}Not found${Reset}"
+fi
+read -n1 -t10 -p "${Yellow}GitHub Key${Reset}    $GITHUB_KEY   Install/Update? (y/n): " INSTALL_GITHUB
+echo
+[ "$INSTALL_GITHUB" == "y" ] && ./github_key_setup.sh
+echo
+
+
 ### MYGPG
 if [ -f /usr/local/bin/mygpg ]; then
   diff -q ./mygpg.sh /usr/local/bin/mygpg &>/dev/null
@@ -49,58 +74,15 @@ echo
 [ "$INSTALL_MYGPG" == "y" ] && sudo cp -vf ./mygpg.sh /usr/local/bin/mygpg
 echo
 
-### VIM PLUGINS
-if [ -d "${HOME}/.vim-plugins" ]; then
-  VIM_PLUGINS="${Green}Exists${Reset}"
-else
-  VIM_PLUGINS="${Red}Not found${Reset}"
-fi
-read -n1 -t10 -p "${Yellow}Vim Plugins${Reset}   $VIM_PLUGINS   Install/Update? (y/n): " INSTALL_VIM_PLUGINS
-echo
-[ "$INSTALL_VIM_PLUGINS" == "y" ] && ./vim_plugins.sh
-echo
-
-### GITHUB
-if [ -f "${HOME}/.ssh/github_rsa" ]; then
-  GITHUB_KEY="${Green}Exists${Reset}"
-else
-  GITHUB_KEY="${Red}Not found${Reset}"
-fi
-read -n1 -t10 -p "${Yellow}GitHub Key${Reset}    $GITHUB_KEY   Install/Update? (y/n): " INSTALL_GITHUB
-echo
-[ "$INSTALL_GITHUB" == "y" ] && ./github_key_setup.sh
-echo
-
-### PIP
-if [ "$(type -P pip)" ]; then 
-  PIP="${Green}$(pip --version | awk '{print $2}')${Reset}"
-else
-  PIP="${Red}Not installed${Reset}"
-fi
-read -n1 -t10 -p "${Yellow}Pip${Reset}           $PIP   Install/Update? (y/n): " INSTALL_PIP
-echo
-[ "$INSTALL_PIP" == "y" ] && sudo ./pip_install.sh
-echo
 
 ### ANSIBLE
-if [ "$(type -P ansible)" ]; then
-  ANSIBLE="${Green}$(ansible --version | awk 'NR==1 {print $2}')${Reset}"
-else
-  ANSIBLE="${Red}Not installed${Reset}"
-fi
-read -n1 -t10 -p "${Yellow}Ansible${Reset}       $ANSIBLE   Install/Update? (y/n): " INSTALL_ANSIBLE
-echo
-[ "$INSTALL_ANSIBLE" == "y" ] && ./ansible_install.sh
-echo
-
-### DROPBOX
-if [ "$(type -P dropbox)" ]; then
-  DROPBOX="${Green}Installed${Reset}"
-else
-  DROPBOX="${Red}Not installed${Reset}"
-fi
-read -n1 -t10 -p "${Yellow}Dropbox${Reset}       $DROPBOX   Install/Update? (y/n): " INSTALL_DROPBOX
-echo
-[ "$INSTALL_DROPBOX" == "y" ] && ./dropbox_install.sh
-echo
+# if [ "$(type -P ansible)" ]; then
+#   ANSIBLE="${Green}$(ansible --version | awk 'NR==1 {print $2}')${Reset}"
+# else
+#   ANSIBLE="${Red}Not installed${Reset}"
+# fi
+# read -n1 -t10 -p "${Yellow}Ansible${Reset}       $ANSIBLE   Install/Update? (y/n): " INSTALL_ANSIBLE
+# echo
+# [ "$INSTALL_ANSIBLE" == "y" ] && ./ansible_install.sh
+# echo
 
